@@ -12,6 +12,7 @@ class MainActivity : ComponentActivity() {
             AppSordoMudosTheme {
                 // Cargar la aplicación
                 AppSordoMudosApp()
+                // (mike wazouzki)
             }
         }
     }
