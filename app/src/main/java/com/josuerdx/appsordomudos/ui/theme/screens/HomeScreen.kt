@@ -1,5 +1,6 @@
 package com.josuerdx.appsordomudos.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -7,13 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.room.Room
 import com.josuerdx.appsordomudos.R
 import com.josuerdx.appsordomudos.ui.theme.components.CustomTabBar
+import com.josuerdx.database.AppDatabase
 
 @Composable
 fun HomeScreen(
@@ -26,15 +30,20 @@ fun HomeScreen(
     onUserClick: () -> Unit = {},
     onMenuClick: () -> Unit = {}
 ) {
+
+    val context = LocalContext.current
+    val db = Room.databaseBuilder(
+        context,
+        AppDatabase::class.java, "user-database"
+    ).build()
+
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         color = Color.White // Fondo
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Título centrado
             Text(
                 text = "EchoHands",
                 fontSize = 50.sp,
@@ -45,7 +54,6 @@ fun HomeScreen(
                     .padding(top = 60.dp)
             )
 
-            // contenido principal
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -53,7 +61,6 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                // Espaciador
                 Spacer(modifier = Modifier.height(80.dp))
 
                 // Column centrada

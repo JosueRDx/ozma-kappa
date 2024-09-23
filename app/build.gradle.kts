@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     debugImplementation(libs.androidx.ui.tooling)
 
     // Material 3

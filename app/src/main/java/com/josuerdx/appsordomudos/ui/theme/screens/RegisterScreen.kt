@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,6 +29,7 @@ fun RegisterScreen(
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -135,7 +135,7 @@ fun RegisterScreen(
                     OutlinedTextField(
                         value = confirmPassword,
                         onValueChange = { confirmPassword = it },
-                        label = { Text("Confimar contraseña", color = Color.White) },
+                        label = { Text("Confirmar contraseña", color = Color.White) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp),
@@ -154,7 +154,7 @@ fun RegisterScreen(
                     // Mensaje de error
                     if (showError) {
                         Text(
-                            text = "Completa todos los campos",
+                            text = errorMessage,
                             color = Color.Red,
                             modifier = Modifier.padding(top = 8.dp)
                         )
@@ -167,10 +167,27 @@ fun RegisterScreen(
             // Botón de Register
             Button(
                 onClick = {
-                    if (name.isNotEmpty() && lastName.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                        onRegisterClick()
-                    } else {
-                        showError = true
+                    when {
+                        name.isEmpty() -> {
+                            showError = true
+                            errorMessage = "El nombre no puede estar vacío"
+                        }
+                        lastName.isEmpty() -> {
+                            showError = true
+                            errorMessage = "El apellido no puede estar vacío"
+                        }
+                        password.length < 8 -> {
+                            showError = true
+                            errorMessage = "La contraseña debe tener al menos 8 caracteres"
+                        }
+                        password != confirmPassword -> {
+                            showError = true
+                            errorMessage = "Las contraseñas no coinciden"
+                        }
+                        else -> {
+                            showError = false
+                            onRegisterClick()
+                        }
                     }
                 },
                 modifier = Modifier
