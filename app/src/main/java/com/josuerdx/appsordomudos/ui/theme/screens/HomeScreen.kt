@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.ui.screens
+package com.josuerdx.appsordomudos.ui.theme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -66,11 +66,11 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(100.dp)
                     ) {
                         HomeIconItem(
-                            iconRes = R.drawable.hhome,
+                            iconRes = R.drawable.signal,
                             onClick = onConnectionClick
                         )
                         HomeIconItem(
-                            iconRes = R.drawable.hhome,
+                            iconRes = R.drawable.deep_learning,
                             onClick = onLearningClick
                         )
                     }
@@ -80,11 +80,11 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(150.dp)
                     ) {
                         HomeIconItem(
-                            iconRes = R.drawable.hhome,
+                            iconRes = R.drawable.settings,
                             onClick = onSettingsClick
                         )
                         HomeIconItem(
-                            iconRes = R.drawable.hhome,
+                            iconRes = R.drawable.add,
                             onClick = onAddClick
                         )
                     }
@@ -119,7 +119,7 @@ fun HomeIconItem(iconRes: Int, onClick: () -> Unit) {
         Image(
             painter = painterResource(id = iconRes),
             contentDescription = null,
-            modifier = Modifier.size(80.dp) // Tamaño de los íconos
+            modifier = Modifier.size(340.dp) // Tamaño de los íconos
         )
     }
 }

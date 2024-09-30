@@ -32,14 +32,14 @@ fun CustomTabBar(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
         ) {
             // User
             IconButton(onClick = onUserClick) {
                 Icon(
                     imageVector = Icons.Filled.Person,
                     contentDescription = "User Profile",
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.size(45.dp)
                 )
             }
 
@@ -48,7 +48,8 @@ fun CustomTabBar(
                 Icon(
                     imageVector = Icons.Filled.Home,
                     contentDescription = "Home",
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.size(45.dp)
                 )
             }
 
@@ -57,7 +58,8 @@ fun CustomTabBar(
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Menu",
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.size(45.dp)
                 )
             }
         }

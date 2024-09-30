@@ -124,7 +124,7 @@ fun LoginScreen(
                     // Mensaje de error
                     if (showError) {
                         Text(
-                            text = "Por favor complete todos los campos",
+                            text = "Completa todos los campos",
                             color = Color.Red,
                             modifier = Modifier.padding(top = 8.dp)
                         )

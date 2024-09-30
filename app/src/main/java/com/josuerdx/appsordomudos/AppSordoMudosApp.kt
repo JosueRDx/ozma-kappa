@@ -5,8 +5,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.josuerdx.appsordomudos.ui.screens.HomeScreen
+import com.josuerdx.appsordomudos.ui.theme.screens.HomeScreen
 import com.josuerdx.appsordomudos.ui.screens.LoginScreen
+import com.josuerdx.appsordomudos.ui.theme.screens.ProfileScreen
 import com.josuerdx.appsordomudos.ui.theme.screens.RegisterScreen
 import com.josuerdx.appsordomudos.ui.theme.screens.SplashScreen
 import kotlinx.coroutines.delay
@@ -16,7 +17,7 @@ fun AppSordoMudosApp() {
     // Controlador de navegación
     val navController = rememberNavController()
 
-    // LaunchedEffect
+    // LaunchedEffect para mostrar la pantalla Splash durante 1 segundo
     LaunchedEffect(Unit) {
         delay(1000)
         navController.navigate("login") {
@@ -45,7 +46,17 @@ fun AppSordoMudosApp() {
         }
         // Pantalla de Home
         composable("home") {
-            HomeScreen(onUserClick = {})
+            HomeScreen(
+                onUserClick = { navController.navigate("profile") },
+                onHomeClick = { /* Acción de Home */ },
+                onMenuClick = { /* Acción de Menú */ }
+            )
+        }
+        // Pantalla de Perfil
+        composable("profile") {
+            ProfileScreen(
+                onCloseClick = { navController.popBackStack() }
+            )
         }
     }
 }
