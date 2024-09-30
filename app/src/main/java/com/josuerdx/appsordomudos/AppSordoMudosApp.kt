@@ -55,7 +55,9 @@ fun AppSordoMudosApp() {
         // Pantalla de Perfil
         composable("profile") {
             ProfileScreen(
-                onCloseClick = { navController.popBackStack() }
+                onCloseClick = { navController.popBackStack() },
+                onHomeClick = { navController.navigate("home") }
+
             )
         }
     }
