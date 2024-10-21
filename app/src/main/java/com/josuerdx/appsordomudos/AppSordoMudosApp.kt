@@ -5,11 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.josuerdx.appsordomudos.ui.theme.screens.HomeScreen
-import com.josuerdx.appsordomudos.ui.screens.LoginScreen
-import com.josuerdx.appsordomudos.ui.theme.screens.ProfileScreen
-import com.josuerdx.appsordomudos.ui.theme.screens.RegisterScreen
-import com.josuerdx.appsordomudos.ui.theme.screens.SplashScreen
+import com.josuerdx.appsordomudos.screens.HomeScreen
+import com.josuerdx.appsordomudos.screens.LoginScreen
+import com.josuerdx.appsordomudos.screens.ProfileScreen
+import com.josuerdx.appsordomudos.screens.RegisterScreen
+import com.josuerdx.appsordomudos.screens.SplashScreen
 import kotlinx.coroutines.delay
 
 @Composable

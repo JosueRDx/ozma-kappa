@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.ui.theme.screens
+package com.josuerdx.appsordomudos.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
