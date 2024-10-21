@@ -3,7 +3,6 @@ package com.josuerdx.appsordomudos.ui.theme.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -16,106 +15,92 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import com.josuerdx.appsordomudos.ui.theme.components.CustomTabBar
+import com.josuerdx.appsordomudos.UserData
+import com.josuerdx.appsordomudos.ui.theme.components.CustomTabBar // Asegúrate de importar correctamente el TabBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(
-    onCloseClick: () -> Unit = {}, // Acción para cerrar el perfil
-    onSaveClick: () -> Unit = {}, // Acción para guardar los cambios
-    onCancelClick: () -> Unit = {}, // Acción para cancelar
-    onHomeClick: () -> Unit = {}, // Acción para el botón de Home
-    onUserClick: () -> Unit = {}, // Acción para el botón de Perfil
-    onMenuClick: () -> Unit = {}  // Acción para el botón de Menú
+    user: UserData,
+    onCloseClick: () -> Unit,
+    onHomeClick: () -> Unit,
+    onUserClick: () -> Unit,  // Añadir el callback para el usuario
+    onMenuClick: () -> Unit    // Añadir el callback para el menú
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF444444)), // Fondo oscuro
+            .background(Color(0xFF444444)),
         contentAlignment = Alignment.Center
     ) {
-        // Contenedor principal del perfil
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .fillMaxHeight(0.8f)
-                .padding(16.dp),
-            color = Color(0xFF6D3E39),
-            shape = RoundedCornerShape(16.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween // Espacio entre el contenido y el TabBar
         ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .fillMaxHeight(0.8f)
+                    .padding(16.dp),
+                color = Color(0xFF6D3E39),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                // Encabezado y botón de cerrar
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = "Perfil Usuario",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                    IconButton(
-                        onClick = onCloseClick
+                    // Encabezado y botón de cerrar
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            imageVector = Icons.Filled.Close,
-                            contentDescription = "Cerrar",
-                            tint = Color.White,
-                            modifier = Modifier.size(30.dp)
+                        Text(
+                            text = "Perfil Usuario",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
+                        IconButton(onClick = onCloseClick) {
+                            Icon(
+                                imageVector = Icons.Filled.Close,
+                                contentDescription = "Cerrar",
+                                tint = Color.White
+                            )
+                        }
                     }
-                }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                // Campos de información del usuario
-                ProfileField("Nombres")
-                ProfileField("Apellidos")
-                ProfileField("Dirección")
-                ProfileField("Correo")
-                ProfileField("Más información")
+                    // Información del usuario
+                    Text(text = "Nombre: ${user.nombre}", color = Color.White)
+                    Text(text = "Apellidos: ${user.apellido}", color = Color.White)
+                    Text(text = "Correo: ${user.correo}", color = Color.White)
+                    Text(text = "Dirección: ${user.direccion}", color = Color.White)
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Botones guardar y cancelar
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Button(
-                        onClick = onSaveClick,
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF512926)),
-                        shape = RoundedCornerShape(50),
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(end = 8.dp)
+                    // Botones para guardar o cancelar
+                    Spacer(modifier = Modifier.weight(1f))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Guardar", color = Color.White)
-                    }
-                    OutlinedButton(
-                        onClick = onCancelClick,
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
-                        border = ButtonDefaults.outlinedButtonBorder.copy(width = 1.dp),
-                        shape = RoundedCornerShape(50),
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(text = "Cancelar")
+                        Button(
+                            onClick = { /* Manejar acción de guardar */ },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6D3E39))
+                        ) {
+                            Text(text = "Guardar", color = Color.White)
+                        }
+                        Button(
+                            onClick = onHomeClick,
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6D3E39))
+                        ) {
+                            Text(text = "Cancelar", color = Color.White)
+                        }
                     }
                 }
             }
-        }
 
-        // TabBar
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-        ) {
+            // Implementar el TabBar en la parte inferior
             CustomTabBar(
                 onHomeClick = onHomeClick,
                 onUserClick = onUserClick,
@@ -125,23 +110,19 @@ fun ProfileScreen(
     }
 }
 
-@Composable
-fun ProfileField(fieldLabel: String) {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = fieldLabel,
-            color = Color.White,
-            fontSize = 18.sp,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-        Divider(color = Color.LightGray, thickness = 1.dp)
-    }
-}
-
 @Preview
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen()
+    ProfileScreen(
+        user = UserData(
+            nombre = "Juan",
+            apellido = "Pérez",
+            correo = "juan.perez@example.com",
+            direccion = "Calle Falsa 123"
+        ),
+        onCloseClick = { /* Acción de cerrar */ },
+        onHomeClick = { /* Acción de volver a inicio */ },
+        onUserClick = { /* Acción de perfil */ },
+        onMenuClick = { /* Acción de menú */ }
+    )
 }
