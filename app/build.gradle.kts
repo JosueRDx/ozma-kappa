@@ -7,6 +7,7 @@ plugins {
     id("com.google.firebase.firebase-perf")
     id("dagger.hilt.android.plugin")
     id("com.ncorti.ktfmt.gradle") version "0.10.0"
+    kotlin("kapt") // Necesario para usar KAPT con Hilt
 }
 
 android {
@@ -63,10 +64,6 @@ android {
     }
 }
 
-ktfmt {
-    googleStyle()
-}
-
 dependencies {
     // Core libraries
     implementation(libs.androidx.core.ktx)
@@ -99,7 +96,7 @@ dependencies {
 
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.47")
-    ksp("com.google.dagger:hilt-compiler:2.47")
+    kapt("com.google.dagger:hilt-android-compiler:2.47") // Cambiar a KAPT
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
@@ -124,5 +121,5 @@ dependencies {
     // Hilt testing
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
     androidTestImplementation("com.google.truth:truth:1.1.3")
-    kspAndroidTest("com.google.dagger:hilt-compiler:2.47")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.47") // Cambiar a KAPT para tests
 }
