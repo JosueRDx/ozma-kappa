@@ -14,50 +14,68 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AppSordoMudosApp() {
-    // Controlador de navegación
     val navController = rememberNavController()
 
-    // LaunchedEffect para mostrar la pantalla Splash durante 1 segundo
+    // Mostrar el SplashScreen durante 2 segundos
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(2000)  // Duración del splash en milisegundos
         navController.navigate("login") {
             popUpTo("splash") { inclusive = true }
         }
     }
 
-    // Definimos las rutas de navegación
+    // Configurar el NavHost para manejar la navegación entre pantallas
     NavHost(navController = navController, startDestination = "splash") {
         // Pantalla de Splash
         composable("splash") {
-            SplashScreen()
+            SplashScreen()  // Aquí se muestra tu SplashScreen personalizado
         }
+
         // Pantalla de Login
         composable("login") {
             LoginScreen(
-                onLoginClick = { navController.navigate("home") },
-                onRegisterClick = { navController.navigate("register") }
+                onLoginSuccess = {
+                    navController.navigate("home") {
+                        popUpTo("login") { inclusive = true }
+                    }
+                },
+                onRegisterClick = {
+                    navController.navigate("register")
+                }
             )
         }
+
         // Pantalla de Registro
         composable("register") {
             RegisterScreen(
-                onRegisterClick = { navController.navigate("home") }
+                onRegisterSuccess = {
+                    navController.navigate("login") {
+                        popUpTo("register") { inclusive = true }
+                    }
+                }
             )
         }
+
         // Pantalla de Home
         composable("home") {
             HomeScreen(
-                onUserClick = { navController.navigate("profile") },
+                onUserClick = {
+                    navController.navigate("profile")
+                },
                 onHomeClick = { /* Acción de Home */ },
                 onMenuClick = { /* Acción de Menú */ }
             )
         }
+
         // Pantalla de Perfil
         composable("profile") {
             ProfileScreen(
-                onCloseClick = { navController.popBackStack() },
-                onHomeClick = { navController.navigate("home") }
-
+                onCloseClick = {
+                    navController.popBackStack()
+                },
+                onHomeClick = {
+                    navController.navigate("home")
+                }
             )
         }
     }

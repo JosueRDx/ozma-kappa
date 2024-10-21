@@ -11,27 +11,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.josuerdx.appsordomudos.R
+import com.josuerdx.appsordomudos.common.composable.TextFieldComposable
+import kotlinx.coroutines.launch
 
 @Composable
 fun RegisterScreen(
-    onRegisterClick: () -> Unit = {}
+    viewModel: RegisterViewModel = hiltViewModel(),
+    onRegisterSuccess: () -> Unit
 ) {
-    var name by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState
+    val coroutineScope = rememberCoroutineScope()
     var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color(0xFF1C1C1C) // Fondo
+        color = Color(0xFF444444) // Fondo oscuro
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,7 +43,7 @@ fun RegisterScreen(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "App Logo",
                 modifier = Modifier
-                    .size(180.dp)
+                    .size(200.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
@@ -56,7 +56,6 @@ fun RegisterScreen(
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .fillMaxWidth(0.89f)
-                    .height(480.dp)
                     .padding(16.dp)
             ) {
                 Column(
@@ -64,87 +63,38 @@ fun RegisterScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Registrarse",
+                        text = stringResource(id = R.string.create_account),
                         color = Color.White,
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        fontSize = 25.sp
                     )
 
-                    // Name
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = { Text("Nombres", color = Color.White) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        singleLine = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
-                    )
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    // LastName
-                    OutlinedTextField(
-                        value = lastName,
-                        onValueChange = { lastName = it },
-                        label = { Text("Apellidos", color = Color.White) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        singleLine = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
+                    // Email
+                    TextFieldComposable(
+                        value = uiState.email,
+                        onValueChange = viewModel::onEmailChange,
+                        label = stringResource(id = R.string.email)
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
 
                     // Password
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        label = { Text("Contraseña", color = Color.White) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        visualTransformation = PasswordVisualTransformation(),
-                        singleLine = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
+                    TextFieldComposable(
+                        value = uiState.password,
+                        onValueChange = viewModel::onPasswordChange,
+                        label = stringResource(id = R.string.password),
+                        isPassword = true
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
 
                     // Confirm Password
-                    OutlinedTextField(
-                        value = confirmPassword,
-                        onValueChange = { confirmPassword = it },
-                        label = { Text("Confimar contraseña", color = Color.White) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        visualTransformation = PasswordVisualTransformation(),
-                        singleLine = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
+                    TextFieldComposable(
+                        value = uiState.confirmPassword,
+                        onValueChange = viewModel::onConfirmPasswordChange,
+                        label = stringResource(id = R.string.repeat_password),
+                        isPassword = true
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
@@ -152,7 +102,7 @@ fun RegisterScreen(
                     // Mensaje de error
                     if (showError) {
                         Text(
-                            text = "Completa todos los campos",
+                            text = errorMessage,
                             color = Color.Red,
                             modifier = Modifier.padding(top = 8.dp)
                         )
@@ -165,10 +115,17 @@ fun RegisterScreen(
             // Botón de Register
             Button(
                 onClick = {
-                    if (name.isNotEmpty() && lastName.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                        onRegisterClick()
-                    } else {
-                        showError = true
+                    coroutineScope.launch {
+                        viewModel.onRegisterClick(
+                            onSuccess = {
+                                showError = false
+                                onRegisterSuccess()
+                            },
+                            onError = {
+                                showError = true
+                                errorMessage = it
+                            }
+                        )
                     }
                 },
                 modifier = Modifier
@@ -176,14 +133,8 @@ fun RegisterScreen(
                     .height(55.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6D3E39))
             ) {
-                Text(text = "Registrarse", color = Color.White, fontSize = 16.sp)
+                Text(text = stringResource(id = R.string.create_account), color = Color.White, fontSize = 16.sp)
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
 }

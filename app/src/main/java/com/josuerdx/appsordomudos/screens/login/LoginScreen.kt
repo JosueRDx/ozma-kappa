@@ -11,21 +11,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.josuerdx.appsordomudos.R
+import com.josuerdx.appsordomudos.common.composable.TextFieldComposable
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoginClick: () -> Unit = {},
-    onRegisterClick: () -> Unit = {}
+    viewModel: LoginViewModel = hiltViewModel(),
+    onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState
+    val coroutineScope = rememberCoroutineScope()
     var showError by remember { mutableStateOf(false) }
 
     Surface(
@@ -62,60 +66,28 @@ fun LoginScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Inciar Sesión",
+                        text = "Iniciar Sesión",
                         color = Color.White,
                         fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
 
-                    // Username
-                    OutlinedTextField(
-                        value = username,
-                        onValueChange = { username = it },
-                        label = {
-                            Text(
-                                text = "Nombre de Usuario",
-                                color = Color.White
-                            )
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        singleLine = true,
-
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
+                    // Email
+                    TextFieldComposable(
+                        value = uiState.email,
+                        onValueChange = viewModel::onEmailChange,
+                        label = stringResource(id = R.string.email)
                     )
 
                     Spacer(modifier = Modifier.height(18.dp))
 
                     // Password
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        label = {
-                            Text(
-                                text = "Contraseña",
-                                color = Color.White
-                            )
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-                        visualTransformation = PasswordVisualTransformation(),
-                        singleLine = true,
-
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFFD1A3A4),
-                            unfocusedBorderColor = Color.White,
-                            cursorColor = Color.White
-                        )
+                    TextFieldComposable(
+                        value = uiState.password,
+                        onValueChange = viewModel::onPasswordChange,
+                        label = stringResource(id = R.string.password),
+                        isPassword = true
                     )
 
                     Spacer(modifier = Modifier.height(10.dp))
@@ -136,8 +108,13 @@ fun LoginScreen(
             // Botón de Login
             Button(
                 onClick = {
-                    if (username.isNotEmpty() && password.isNotEmpty()) {
-                        onLoginClick()
+                    if (uiState.email.isNotEmpty() && uiState.password.isNotEmpty()) {
+                        coroutineScope.launch {
+                            viewModel.onLoginClick(
+                                onSuccess = { onLoginSuccess() },
+                                onError = { showError = true }
+                            )
+                        }
                     } else {
                         showError = true
                     }

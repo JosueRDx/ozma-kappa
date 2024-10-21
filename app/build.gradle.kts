@@ -82,6 +82,7 @@ dependencies {
 
     // Material 3
     implementation(libs.androidx.material3)
+    implementation("com.google.android.material:material:1.9.0")
 
     // Navigation for Compose
     implementation(libs.androidx.navigation.runtime.ktx)
@@ -94,6 +95,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-insets:0.25.1")
     implementation("com.google.accompanist:accompanist-pager:0.25.1")
     implementation("androidx.compose.material3:material3:1.1.0-alpha04")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.47")
