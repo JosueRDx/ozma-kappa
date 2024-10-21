@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.screens
+package com.josuerdx.appsordomudos.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
