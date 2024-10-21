@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/black" /> <!-- Fondo oscuro -->
+    <!-- Fondo oscuro -->
+    <item android:drawable="@android:color/black" />
+
+    <!-- Tu logo centrado -->
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo" /> <!-- Asegúrate de que el logo está en drawable-nodpi -->
     </item>
 </layer-list>

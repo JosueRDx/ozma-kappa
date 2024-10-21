@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Tema principal de la aplicación -->
     <style name="Theme.AppSordoMudos" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Asegúrate de que el fondo del tema sea oscuro -->
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
-    <!-- Tema para el SplashScreen -->
+    <!-- Tema para el SplashScreen con fondo oscuro -->
     <style name="Theme.AppSordoMudos.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_screen_background</item>
+        <!-- Fondo oscuro para el Splash -->
+        <item name="android:windowBackground">@drawable/splash_screen_background</item> <!-- Fondo de splash con logo -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
-
 </resources>
