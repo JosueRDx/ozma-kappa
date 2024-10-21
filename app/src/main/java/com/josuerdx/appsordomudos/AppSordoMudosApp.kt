@@ -1,7 +1,6 @@
 package com.josuerdx.appsordomudos
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -9,28 +8,13 @@ import com.josuerdx.appsordomudos.screens.HomeScreen
 import com.josuerdx.appsordomudos.screens.login.LoginScreen
 import com.josuerdx.appsordomudos.screens.ProfileScreen
 import com.josuerdx.appsordomudos.screens.sign_up.RegisterScreen
-import com.josuerdx.appsordomudos.screens.splash.SplashScreen
-import kotlinx.coroutines.delay
 
 @Composable
 fun AppSordoMudosApp() {
     val navController = rememberNavController()
 
-    // Mostrar el SplashScreen durante 2 segundos
-    LaunchedEffect(Unit) {
-        delay(2000)  // Duración del splash en milisegundos
-        navController.navigate("login") {
-            popUpTo("splash") { inclusive = true }
-        }
-    }
-
-    // Configurar el NavHost para manejar la navegación entre pantallas
-    NavHost(navController = navController, startDestination = "splash") {
-        // Pantalla de Splash
-        composable("splash") {
-            SplashScreen()  // Aquí se muestra tu SplashScreen personalizado
-        }
-
+    // Configurar el NavHost para navegar entre las pantallas
+    NavHost(navController = navController, startDestination = "login") {
         // Pantalla de Login
         composable("login") {
             LoginScreen(

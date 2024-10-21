@@ -2,7 +2,11 @@
 <resources>
 
     <style name="Theme.AppSordoMudos" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Tema para el SplashScreen -->
+    <style name="Theme.AppSordoMudos.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_background</item>
     </style>
 
 </resources>
