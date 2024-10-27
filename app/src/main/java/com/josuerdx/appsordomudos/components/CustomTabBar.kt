@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.ui.theme.components
+package com.josuerdx.appsordomudos.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

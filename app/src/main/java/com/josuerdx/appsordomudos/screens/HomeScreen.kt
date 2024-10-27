@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.ui.theme.screens
+package com.josuerdx.appsordomudos.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.josuerdx.appsordomudos.R
-import com.josuerdx.appsordomudos.ui.theme.components.CustomTabBar
+import com.josuerdx.appsordomudos.components.CustomTabBar
 
 @Composable
 fun HomeScreen(

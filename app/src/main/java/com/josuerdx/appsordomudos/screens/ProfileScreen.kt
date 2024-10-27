@@ -1,4 +1,4 @@
-package com.josuerdx.appsordomudos.ui.theme.screens
+package com.josuerdx.appsordomudos.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import com.josuerdx.appsordomudos.ui.theme.components.CustomTabBar
+import com.josuerdx.appsordomudos.components.CustomTabBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

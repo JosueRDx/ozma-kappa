@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">AppSordoMudos</string>
+
+    <!-- Común -->
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+    <string name="generic_error">Ocurrió un error. Por favor, inténtalo de nuevo.</string>
+    <string name="email_error">Por favor, introduce un correo electrónico válido.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="try_again">Intentar de nuevo</string>
+    <string name="ok">OK</string>
+
+    <!-- Pantalla de inicio de sesión -->
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="login_details">Introduce tus datos de inicio de sesión</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña? Haz clic para recibir un correo de recuperación</string>
+    <string name="recovery_email_sent">Revisa tu bandeja de entrada para el correo de recuperación.</string>
+    <string name="empty_password_error">La contraseña no puede estar vacía.</string>
+    <string name="email_not_verified_error">Verifica tu correo antes de iniciar sesión.</string>
+
+    <!-- Pantalla de registro -->
+    <string name="create_account">Crear cuenta</string>
+    <string name="password_error">Tu contraseña debe tener al menos seis caracteres e incluir un número, una letra minúscula y una letra mayúscula.</string>
+    <string name="password_match_error">Las contraseñas no coinciden.</string>
+    <string name="verification_email_sent">Se ha enviado un correo de verificación.</string>
+
 </resources>
