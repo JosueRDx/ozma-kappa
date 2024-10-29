@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.josuerdx.appsordomudos.screens.HomeScreen
+import com.josuerdx.appsordomudos.screens.home.HomeScreen
 import com.josuerdx.appsordomudos.screens.login.LoginScreen
 import com.josuerdx.appsordomudos.screens.ProfileScreen
 import com.josuerdx.appsordomudos.screens.sign_up.RegisterScreen

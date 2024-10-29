@@ -122,4 +122,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
     androidTestImplementation("com.google.truth:truth:1.1.3")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.47") // Cambiar a KAPT para tests
+
+    // Dependencia para MQTT
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 }
