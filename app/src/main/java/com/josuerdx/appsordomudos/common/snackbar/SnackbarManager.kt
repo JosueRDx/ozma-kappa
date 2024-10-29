@@ -7,6 +7,7 @@ object SnackbarManager {
     val messages = MutableSharedFlow<SnackbarMessage>()
 
     suspend fun showMessage(message: String) {
+        println("Snackbar message: $message")
         messages.emit(SnackbarMessage(message))
     }
 }

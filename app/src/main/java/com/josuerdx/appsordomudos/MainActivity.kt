@@ -9,11 +9,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_AppSordoMudos)  // Cambiar al tema principal antes de setContent
+        setTheme(R.style.Theme_AppSordoMudos)
         super.onCreate(savedInstanceState)
         setContent {
             AppSordoMudosTheme {
-                AppSordoMudosApp()  // El contenido de tu aplicación
+                AppSordoMudosApp()
             }
         }
     }
