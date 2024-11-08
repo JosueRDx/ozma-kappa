@@ -1,3 +1,4 @@
+// AppSordoMudosApp.kt
 package com.josuerdx.appsordomudos
 
 import androidx.compose.runtime.Composable
@@ -8,12 +9,13 @@ import com.josuerdx.appsordomudos.screens.home.HomeScreen
 import com.josuerdx.appsordomudos.screens.login.LoginScreen
 import com.josuerdx.appsordomudos.screens.ProfileScreen
 import com.josuerdx.appsordomudos.screens.sign_up.RegisterScreen
+import com.josuerdx.appsordomudos.screens.options.OptionsScreen
+import com.josuerdx.appsordomudos.screens.addsign.AddSignScreen
 
 @Composable
 fun AppSordoMudosApp() {
     val navController = rememberNavController()
 
-    // Configurar el NavHost para navegar entre las pantallas
     NavHost(navController = navController, startDestination = "login") {
         // Pantalla de Login
         composable("login") {
@@ -46,8 +48,12 @@ fun AppSordoMudosApp() {
                 onUserClick = {
                     navController.navigate("profile")
                 },
-                onHomeClick = { /* Acción de Home */ },
-                onMenuClick = { /* Acción de Menú */ }
+                onHomeClick = {
+                    navController.navigate("home") // Mantente en Home si ya estás en Home
+                },
+                onMenuClick = {
+                    navController.navigate("options")
+                }
             )
         }
 
@@ -60,6 +66,37 @@ fun AppSordoMudosApp() {
                 onHomeClick = {
                     navController.navigate("home")
                 }
+            )
+        }
+
+        // Pantalla de Opciones
+        composable("options") {
+            OptionsScreen(
+                onAddSignClick = {
+                    navController.navigate("addsign") // Navega a la pantalla de agregar seña
+                },
+                onTranslatorClick = {
+                    // Aquí puedes navegar a la pantalla de Traductor
+                },
+                onMyGesturesClick = {
+                    // Aquí puedes navegar a la pantalla de Mis Gestos
+                },
+                onInfoClick = {
+                    // Aquí puedes navegar a la pantalla de Información
+                },
+                onHomeClick = { navController.navigate("home") },    // Navega a Home
+                onUserClick = { navController.navigate("profile") }, // Navega a Perfil
+                onMenuClick = { navController.navigate("options") } // Mantente en Opciones
+            )
+        }
+
+        // Pantalla de Agregar Seña
+        composable("addsign") {
+            AddSignScreen(
+                onSaveClick = { navController.popBackStack() }, // Navega de regreso después de guardar
+                onHomeClick = { navController.navigate("home") },    // Navega a Home
+                onUserClick = { navController.navigate("profile") }, // Navega a Perfil
+                onMenuClick = { navController.navigate("options") } // Navega a Opciones
             )
         }
     }
