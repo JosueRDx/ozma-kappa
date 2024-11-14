@@ -75,6 +75,11 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.annotations)
+    implementation(libs.annotations)
     debugImplementation(libs.androidx.ui.tooling)
 
     // Material 3
@@ -127,7 +132,29 @@ dependencies {
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 
     // Dependencias de Retrofit y Gson
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+
+    // Dependencia de OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+    // Dependencias Retrofit
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+
+    // Para soporte de AppWidgets
+    implementation("androidx.glance:glance-appwidget:1.1.0")
+    // Para APIs interop con Material 3
+    implementation("androidx.glance:glance-material3:1.1.0")
+    // Para APIs interop con Material 2
+    implementation("androidx.glance:glance-material:1.1.0")
+
+    implementation("com.google.android.material:material:1.7.0")
+
+
+    implementation("androidx.compose.material:material-icons-extended:1.0.0")
+
 }
