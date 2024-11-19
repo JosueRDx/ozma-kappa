@@ -12,6 +12,8 @@ import com.josuerdx.appsordomudos.screens.sign_up.RegisterScreen
 import com.josuerdx.appsordomudos.screens.options.OptionsScreen
 import com.josuerdx.appsordomudos.screens.addsign.AddSignScreen
 import com.josuerdx.appsordomudos.screens.gestures.GesturesScreen
+import com.josuerdx.appsordomudos.screens.information.InformationScreen
+import com.josuerdx.appsordomudos.screens.settings.SettingsScreen
 
 @Composable
 fun AppSordoMudosApp() {
@@ -83,7 +85,7 @@ fun AppSordoMudosApp() {
                     navController.navigate("gestures")
                 },
                 onInfoClick = {
-                    // Aquí puedes navegar a la pantalla de Información
+                    navController.navigate("information") // Nueva pantalla de Información
                 },
                 onHomeClick = { navController.navigate("home") },
                 onUserClick = { navController.navigate("profile") },
@@ -104,6 +106,26 @@ fun AppSordoMudosApp() {
         // Pantalla de Mis Gestos
         composable("gestures") {
             GesturesScreen(
+                onHomeClick = { navController.navigate("home") },
+                onUserClick = { navController.navigate("profile") },
+                onMenuClick = { navController.navigate("options") }
+            )
+        }
+
+        // Pantalla de Información
+        composable("information") {
+            InformationScreen(
+                onHomeClick = { navController.navigate("home") },
+                onUserClick = { navController.navigate("profile") },
+                onMenuClick = { navController.navigate("options") },
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        // Pantalla de Configuraciones
+        composable("settings") {
+            SettingsScreen(
+                onLogoutClick = { /* Acción para cerrar sesión */ },
                 onHomeClick = { navController.navigate("home") },
                 onUserClick = { navController.navigate("profile") },
                 onMenuClick = { navController.navigate("options") }

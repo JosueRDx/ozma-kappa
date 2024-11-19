@@ -44,4 +44,8 @@ class GesturesViewModel : ViewModel() {
             }
         }
     }
+
+    fun clearEditResult() {
+        _editResult.value = null
+    }
 }

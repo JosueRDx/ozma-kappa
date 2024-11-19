@@ -47,7 +47,7 @@ fun HomeScreen(
     }
 
     MainLayout(
-        title = "EchoHands",
+        title = "GestiGlove",
         onSettingsClick = onSettingsClick,
         onHomeClick = onHomeClick,
         onUserClick = onUserClick,

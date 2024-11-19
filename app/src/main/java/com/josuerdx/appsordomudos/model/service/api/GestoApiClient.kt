@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object GestoApiClient {
-    private const val BASE_URL = "http://192.168.196.205:8000/api/"
+    private const val BASE_URL = "http://192.168.152.49:8000/api/"
 
     val service: GestoApiService by lazy {
         Retrofit.Builder()
